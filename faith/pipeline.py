@@ -377,16 +377,16 @@ class Pipeline:
         """Run pipeline on given instance."""
         start = time.time()
         self.tqu.inference_on_instance(instance, topk_answers, sources)
-        self.logger.debug(instance)
-        self.logger.debug(f"Time taken (TQU): {time.time() - start} seconds")
-        self.logger.debug(f"Running FER")
+        self.logger.info(instance)
+        self.logger.info(f"Time taken (TQU): {time.time() - start} seconds")
+        self.logger.info(f"Running FER")
         self.fer.inference_on_instance(instance, sources)
-        self.logger.debug(instance)
-        self.logger.debug(f"Time taken (TQU, FER): {time.time() - start} seconds")
-        self.logger.debug(f"Running HA")
+        self.logger.info(instance)
+        self.logger.info(f"Time taken (TQU, FER): {time.time() - start} seconds")
+        self.logger.info(f"Running HA")
         self.ha.inference_on_instance(instance, sources)
-        self.logger.debug(instance)
-        self.logger.debug(f"Time taken (ALL): {time.time() - start} seconds")
+        self.logger.info(instance)
+        self.logger.info(f"Time taken (ALL): {time.time() - start} seconds")
         return instance
 
     def set_output_dir(self, sources_str):
@@ -464,14 +464,9 @@ def main():
         pipeline = Pipeline(config)
         pipeline.source_combinations(dev=True)
 
-    elif function == "--top-answer-dev-11":
+    elif function == "--top-answer-dev-3-5":
         pipeline = Pipeline(config)
-        top_answers = [9,10,11]
-        pipeline.top_answer_for_tvr(top_answers, dev=True)
-
-    elif function == "--top-answer-dev-20":
-        pipeline = Pipeline(config)
-        top_answers = [18, 19, 20]
+        top_answers = [3,5]
         pipeline.top_answer_for_tvr(top_answers, dev=True)
 
     elif function == "--top-answer-test-3-5":
