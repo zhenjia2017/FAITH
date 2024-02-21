@@ -1,0 +1,15 @@
+name: "faith"
+log_level: "INFO"
+
+#################################################################
+#  #  Parameters - Temporal annotation
+#################################################################
+#Reference time
+reference_time: '2023-01-01'
+question_date_tag_method: "sutime_regex"
+evidence_date_tag_method: "regex"
+
+#SpaCy model
+spacy_model: "en_core_web_sm"
+
+

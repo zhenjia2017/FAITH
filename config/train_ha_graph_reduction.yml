@@ -1,0 +1,265 @@
+name: "faith"
+log_level: "INFO"
+
+# Construct pipeline
+tqu: seq2seq_tqu
+fer: fer
+ha: explaignn  # explaignn or seq2seq_ha
+# Benchmark name
+benchmark: "tiq" # tiq or timequestions
+# Faith or UNFaith setting, "faith" or "unfaith"
+faith_or_unfaith: "faith" 
+evs_max_evidences: 100
+# Define source combinations
+source_combinations:
+  - - kb
+    - text
+    - table
+    - info
+
+#################################################################
+#  #  Parameters - Temporal annotation
+#################################################################
+#Reference time
+reference_time: '2023-01-01'
+question_date_tag_method: "sutime_regex"
+evidence_date_tag_method: "regex"
+
+#SpaCy model
+spacy_model: "en_core_web_sm"
+
+#################################################################
+#  Data and models specific settings
+#################################################################
+path_to_data: "_data"
+
+#################################################################
+#  Benchmark specific settings
+#################################################################
+benchmark_path: "_benchmarks"
+#TIQ datasets are reformatted as same as TimeQuestions for the pipeline processing
+#For training scoring model and answering model for TIQ, we also need the intermediate question (temporal value questions, TVQ) dataset (TIQ+TVQ)
+train_input_path: "train.json"
+dev_input_path: "dev.json"
+test_input_path: "test.json"
+
+#################################################################
+#  General file paths
+#################################################################
+path_to_stopwords: "_data/stopwords.txt"
+path_to_wikipedia_mappings: "_data/wikipedia_mappings.pickle"
+path_to_labels: "_data/labels.pickle"
+path_to_wikidata_mappings: "_data/augmented_wikidata_mappings.pickle"
+
+#################################################################
+#  Intermediate result path settings
+#################################################################
+path_to_intermediate_results: "_intermediate_representations"
+
+#################################################################
+#  Parameters - CLOCQ
+#################################################################
+clocq_params:
+  h_match: 0.4
+  h_rel: 0.2
+  h_conn: 0.3
+  h_coh: 0.1
+  d: 20
+  #k: "AUTO"
+  k: 5
+  p_setting: 1000 # setting for search_space function
+  bm25_limit: False
+clocq_p: 1000 #  setting for neighborhood function(s)
+clocq_use_api: True # using CLOCQClientInterface
+clocq_host: "https://clocq.mpi-inf.mpg.de/api" # host for client
+clocq_port: "443" # port for client
+
+#################################################################
+#  Parameters - Silver annotation
+#################################################################
+# annotation - TSF
+tsf_relation_shared_active: True
+tsf_remove_stopwords: True
+
+#################################################################
+#  Parameters - Distant supervision
+#################################################################
+# annotation - TSF
+ds_sources:
+  - kb
+  - text
+  - table
+  - info
+
+ds_remove_stopwords: False
+tsf_annotated_path: "tsf_annotation" # where annotated inputs come from
+# annotated train and dev set
+tsf_train: "annotated_train_faith.json"
+tsf_dev: "annotated_dev_faith.json"
+
+#################################################################
+#  Parameters and Datasets - Temporal Question Understanding
+#################################################################
+#  GPT configuration for generating intermediate question and tsf
+gpt3_use_cache_iques: True
+gpt3_cache_path_iques: "gpt_cache"
+#please replace with your personal information
+openai_organization: "your configuration"
+openai_api_key: "your key"
+gpt3_model_iques: "text-davinci-003"
+
+#  Generated intermediate questions from GPT as train set for fine-tuning BART
+intermediate_question_dataset_path: "intermediate_question"
+intermediate_question_train: "gpt_annotate_generate_question_train.json"
+intermediate_question_dev: "gpt_annotate_generate_question_dev.json"
+
+#  Parameters for fine-tuning BART model for generating intermediate questions
+iques_architecture: BART
+iques_model: "iques_model.bin"
+iques_max_input_length: 512
+
+iques_avoid_hallucination: False
+
+# training parameters
+iques_num_train_epochs: 5
+iques_per_device_train_batch_size: 10
+iques_per_device_eval_batch_size: 10
+iques_warmup_steps: 500
+iques_weight_decay: 0.01
+
+# generation parameters
+iques_no_repeat_ngram_size: 2
+iques_num_beams: 20
+iques_early_stopping: True
+iques_k: 3
+iques_delimiter: "||"
+iques_max_length: 50
+
+# Parameters for fine-tuning BART model for generating TSF
+tsf_architecture: BART
+tsf_model: "tsf_model.bin"
+tsf_max_input_length: 512
+tsf_avoid_hallucination: False
+
+# training parameters
+tsf_num_train_epochs: 5
+tsf_per_device_train_batch_size: 10
+tsf_per_device_eval_batch_size: 10
+tsf_warmup_steps: 500
+tsf_weight_decay: 0.01
+
+# generation parameters
+tsf_no_repeat_ngram_size: 2
+tsf_num_beams: 20
+tsf_early_stopping: True
+tsf_k: 3
+tsf_delimiter: "||"
+tsf_max_length: 50
+
+# take the oracle temporal value as the result of implicit question resolver
+tqu_oracle_temporal_value: False
+# use oracle implicit type
+tqu_oracle_temporal_category: False
+# run implicit question resolver
+run_tvr: False
+# top-k answer of intermediate question, 1 as default
+tvr_topk_answer: 1
+
+#################################################################
+#  Parameters - ERS
+#################################################################
+# cache path
+er_wikipedia_use_cache: True
+er_use_cache: True
+er_cache_path: "er_cache/er_cache_evaluate.pickle"
+er_wikipedia_dump: "wikipedia/wikipedia_dump_evaluate.pickle"
+er_on_the_fly: True
+ers_update_clocq_cache: True
+
+# evidence retrieval
+evs_model: sbert
+evr_min_evidence_length: 3
+evr_max_evidence_length: 200
+evr_max_entities: 10 # max entities per evidence
+evr_max_pos_evidences: 10
+
+# evidence scoring
+es_sample_method: random_sample
+bert_max_pos_evidences_per_source: 1
+bert_max_neg_evidences: 15
+bert_train_batch_size: 16
+bert_num_epochs: 4
+
+bert_pretrained_model: "distilroberta-base"
+bert_model: "sbert_model.bin"
+
+#################################################################
+#  Parameters - HA-Seq2seq
+#################################################################
+# general
+ha_architecture: BART
+ha_max_input_length: 512
+ha_max_output_length: 20
+ha_model_dir: "seq2seq"
+
+# training parameters
+ha_num_train_epochs: 5
+ha_per_device_train_batch_size: 10
+ha_per_device_eval_batch_size: 10
+ha_warmup_steps: 500
+ha_weight_decay: 0.01
+
+# generation parameters
+ha_no_repeat_ngram_size: 2
+ha_num_beams: 20
+ha_early_stopping: True
+
+#################################################################
+#  Parameters - HA-EXPLAIGNN
+#################################################################
+# general
+ha_max_answers: 50
+ha_max_supporting_evidences: 5
+
+# encoder
+gnn_encoder_lm: DistilRoBERTa
+gnn_encoder_linear: False
+gnn_emb_dimension: 768
+gnn_enc_sr_max_input: 30
+gnn_enc_ev_max_input: 80
+gnn_enc_ent_max_input: 60
+
+# gnn
+gnn_model: heterogeneous_gnn
+gnn_num_layers: 3
+gnn_model_dir: "explaignn"
+
+gnn_answering: multitask_bilinear
+gnn_max_output_evidences: 5
+
+# dataloader
+gnn_shuffle_evidences: True # shuffle evidences (no order retained)
+gnn_mask_question_entities: False # avoid predicting question entities as answers
+
+# training
+gnn_train_max_pos_evidences: 10
+gnn_train_batch_size: 1
+gnn_epochs: 10
+gnn_learning_rate: 0.00001
+gnn_weight_decay: 0.01
+gnn_clipping_max_norm: 1.0
+gnn_dropout: 0.0
+
+gnn_train:
+  # GNN model for pruning
+  - gnn_encoder: alternating_encoder_cross_SR
+    gnn_model_file: "gnn-pruning-ignn-100-00-10.bin"
+    gnn_multitask_answer_weight: 0.0
+    gnn_multitask_ev_weight: 1.0
+    gnn_decisive_metric: answer_presence # metric for choosing best model from dev set
+
+    gnn_max_evidences: 100
+    gnn_max_entities: 400
+
+# inference/eval
+gnn_eval_batch_size: 10
