@@ -479,7 +479,7 @@ def main():
         top_answers = [3, 5]
         pipeline.top_answer_for_tvr(top_answers)
 
-    elif function == "--evaluate-test":
+    elif function == "--evaluate":
         sources_str = sys.argv[3] if len(sys.argv) > 3 else "kb_text_table_info"
         pipeline = Pipeline(config)
         pipeline.evaluate(sources_str=sources_str)
