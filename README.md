@@ -8,7 +8,7 @@ for faithfully answering temporal questions with tangible evidence.
 <div style="text-align: center;"><img src="faith-overview-figure.png"  alt="overview" width=80%  /></div>
 
 *Overview of the FAITH pipeline. The figure illustrates the process for answering q<sub>3</sub> (“Queen’s record company when recording
-Bohemian Rhapsody?” ) and 𝑞1 (“Record company of Queen in 1975?” ). For answering 𝑞3, two intermediate questions 𝑞31 and 𝑞32
+Bohemian Rhapsody?” ) and q<sub>1</sub> (“Record company of Queen in 1975?” ). For answering q<sub>3</sub>, two intermediate questions q<sub>31</sub> and q<sub>32</sub>
 are generated, and run recursively through the entire temporal QA system.*
 
 For more details see our paper: [Faithful Temporal Question Answering over Heterogeneous Sources]() and visit our project website: https://faith.mpi-inf.mpg.de.
