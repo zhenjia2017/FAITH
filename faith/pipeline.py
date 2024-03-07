@@ -61,18 +61,18 @@ class Pipeline:
             # Step3: Evidence Retrieval
             step3_start = time.time()
             self.logger.info(f"Step3: Start retrieving evidences of TSFs for train and dev sets")
-            self.fer.er_inference(sources)
-            # store results in cache
-            self.fer.store_cache()
-            self.logger.info(f"Time taken (Evidence Retrieval): {time.time() - step3_start} seconds")
-
-            # Step4: Evidence Pruning
-            if self.config["faith_or_unfaith"] == "faith":
-                step4_start = time.time()
-                self.logger.info(
-                    f"Step4: Start pruning evidences for train and dev sets")
-                self.prune()
-                self.logger.info(f"Time taken (Evidence Pruning): {time.time() - step4_start} seconds")
+            # self.fer.er_inference(sources)
+            # # store results in cache
+            # self.fer.store_cache()
+            # self.logger.info(f"Time taken (Evidence Retrieval): {time.time() - step3_start} seconds")
+            #
+            # # Step4: Evidence Pruning
+            # if self.config["faith_or_unfaith"] == "faith":
+            #     step4_start = time.time()
+            #     self.logger.info(
+            #         f"Step4: Start pruning evidences for train and dev sets")
+            #     self.prune()
+            #     self.logger.info(f"Time taken (Evidence Pruning): {time.time() - step4_start} seconds")
 
             # Step5: Train evidence scoring model based on SBERT
             step5_start = time.time()

@@ -2,8 +2,10 @@
 
 Description
 ------
-This repository contains the code, benchmark and data for our WWW'24 full paper "Faithful Temporal Question Answering over Heterogeneous Sources". In this paper, we present FAITH, 
-for faithfully answering temporal questions with tangible evidence. 
+This code is for the FAITH method proposed in our WWW'24 full paper "Faithful Temporal Question
+Answering over Heterogeneous Sources". 
+
+Please visit the following repo [LINK](https://github.com/zhenjia2017/TIQ) to access the code for the TIQ benchmark construction.
 
 <div style="text-align: center;"><img src="faith-overview-figure.png"  alt="overview" width=80%  /></div>
 
