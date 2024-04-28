@@ -2,7 +2,7 @@ import json
 import requests
 
 class SutimeClient:
-	def __init__(self, host="http://localhost", port="7779"):
+	def __init__(self, host="localhost", port="7779"):
 		self.host = host
 		self.port = port
 		self.req = requests.Session()
