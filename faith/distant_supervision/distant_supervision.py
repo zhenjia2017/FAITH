@@ -28,9 +28,9 @@ class DistantSupervision:
         self.tsf_annotator = TSFAnnotator(self.clocq, config)
 
         #  open labels
-        labels_path = config["path_to_labels"]
-        with open(labels_path, "rb") as fp:
-            self.labels_dict = pickle.load(fp)
+        #labels_path = config["path_to_labels"]
+        # with open(labels_path, "rb") as fp:
+        #     self.labels_dict = pickle.load(fp)
 
     def process_dataset(self, dataset_path, output_path):
         """
@@ -38,7 +38,6 @@ class DistantSupervision:
         """
         with open(dataset_path, "r") as fp:
             dataset = json.load(fp)
-
         # process data
         tsf_count = 0
         for instance in tqdm(dataset):

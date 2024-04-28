@@ -38,4 +38,4 @@ def annotation():
     return jsonify(annotate_strings)
 
 if __name__ == "__main__":
-    app.run(host="http://localhost", port=7779, threaded=True)
+    app.run(host="localhost", port=7779, threaded=True)
