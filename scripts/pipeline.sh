@@ -48,7 +48,7 @@ if ! command -v sbatch &> /dev/null
 then
 	# no slurm setup: run via nohup
 	export FUNCTION CONFIG SOURCES OUT
-  	nohup sh -c 'python -u code/faith/pipeline.py ${FUNCTION} ${CONFIG} ${SOURCES}' > $OUT 2>&1 &
+  	nohup sh -c 'python -u faith/pipeline.py ${FUNCTION} ${CONFIG} ${SOURCES}' > $OUT 2>&1 &
 else
 	# run with sbatch
 	sbatch <<EOT
