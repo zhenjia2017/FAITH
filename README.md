@@ -126,17 +126,12 @@ In the TQU stage, there are two Seq2seq models for:
   - (ii) generating intermediate questions
   
 We already provide the annotated TSF, and intermediate questions for TIQ and TimeQuestions benchmarks, as training data respectively.
-    If you would like to generate annotated TSF for other datasets, please follow the instruction in:
-```    
-faith/distant_supervision/README.md
-```
-For generating intermediate questions as training data via GPT, please follow the instruction in:
-```
-faith/temporal_qu/implicit_resolver/seq2seq_iques/data_creation/README.md" 
-```
+    If you would like to generate annotated TSF for other datasets, please follow the instruction in the [document](faith/distant_supervision/README.md).
+
+For generating intermediate questions as training data via GPT, please follow the instruction in the [document](faith/temporal_qu/implicit_resolver/seq2seq_iques/data_creation/README.md).
 
 #### FER
-In the FER stage, we apply a [BERT-based](https://sbert.net) reranker to train classifier and score evidences as the input for answering.
+In the FER stage, we apply a [BERT-based](https://sbert.net/docs/cross_encoder/usage/usage.html) reranker to train classifier and score evidences as the input for answering.
 
 #### EHA
 In the EHA stage, there are two GNN models for:
@@ -150,7 +145,7 @@ We apply the two GNN models in answer inference stage:
 #### For training the models individually, please run the following script:
 
 ```bash
-  bash scripts/pipeline.sh --train_<stage name> <PATH_TO_CONFIG>
+  bash scripts/pipeline.sh --train_<stage name> <PATH_TO_CONFIG> [<SOURCES_STR>]
 ```
 
 For example, training the answer inference model.

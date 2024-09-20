@@ -361,15 +361,16 @@ class Pipeline:
     def example(self, sources_str):
         """Run pipeline on a single input question."""
         instance = {
-            "Id": 8111,
+            "Id": 9918,
             "Question creation date": "2023-07-15",
-            "Question": "What national rugby union team did Gary Seear play on when he was a member of the Fracasso San Dona club?",
-            "answers": [{"id": "Q55801", "label": "New Zealand national rugby union team"}]}
+            "Question": "What football team was Boomer Esiason playing for as a quarterback before he was nominated for the Walter Payton Man of the Year Award?",
+            "answers": [{"id": "Q219602", "label": "New York Jets"}]}
         topk_answers = 1
         # run inference
         sources = sources_str.split("_")
         start = time.time()
         instance = self.inference_on_instance(instance, topk_answers, sources)
+        store_json_with_mkdir([instance], "/GW/qa5/work/ehtqa/FAITH/_results/example.json")
         self.logger.info(instance)
         self.logger.info(f"Time taken (ALL): {time.time() - start} seconds")
 
