@@ -13,7 +13,7 @@ Please visit the following repo [LINK](https://github.com/zhenjia2017/TIQ) to ac
 Bohemian Rhapsody?” ) and q<sub>1</sub> (“Record company of Queen in 1975?” ). For answering q<sub>3</sub>, two intermediate questions q<sub>31</sub> and q<sub>32</sub>
 are generated, and run recursively through the entire temporal QA system.*
 
-For more details see our paper: [Faithful Temporal Question Answering over Heterogeneous Sources]() and visit our project website: https://faith.mpi-inf.mpg.de.
+For more details see our paper: [Faithful Temporal Question Answering over Heterogeneous Sources](https://dl.acm.org/doi/10.1145/3589334.3645547) and visit our project website: https://faith.mpi-inf.mpg.de.
 
 If you use this code, please cite:
 ```bibtex
