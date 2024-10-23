@@ -57,6 +57,11 @@ path_to_wikidata_mappings: "_data/augmented_wikidata_mappings.pickle"
 path_to_intermediate_results: "_intermediate_representations"
 
 #################################################################
+#  Example result path settings
+#################################################################
+path_to_results: "_results"
+
+#################################################################
 #  Parameters - CLOCQ
 #################################################################
 clocq_params:

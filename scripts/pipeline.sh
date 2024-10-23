@@ -62,6 +62,6 @@ else
 #SBATCH -d singleton
 #SBATCH --mem 256G
 
-python -u code/faith/pipeline.py $FUNCTION $CONFIG $SOURCES
+python -u faith/pipeline.py $FUNCTION $CONFIG $SOURCES
 EOT
 fi

@@ -370,7 +370,9 @@ class Pipeline:
         sources = sources_str.split("_")
         start = time.time()
         instance = self.inference_on_instance(instance, topk_answers, sources)
-        store_json_with_mkdir([instance], "/GW/qa5/work/ehtqa/FAITH/_results/example.json")
+        path_to_results = self.config["path_to_results"]
+        output_path = os.path.join(path_to_results, self.benchmark, "example.json")
+        store_json_with_mkdir([instance], output_path)
         self.logger.info(instance)
         self.logger.info(f"Time taken (ALL): {time.time() - start} seconds")
 
