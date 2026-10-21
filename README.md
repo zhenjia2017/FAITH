@@ -104,6 +104,22 @@ _data
 - tiq/unfaith/explaignn/gnn-pruning-ignn-100-00-10.bin: graph reduction model in HA stage for UNFAITH settings
 - tiq/unfaith/explaignn/gnn-answering-ignn-100-05-05.bin: answer inference model in HA stage for UNFAITH settings
 
+### Test-set caches
+
+Wikipedia and Wikidata change over time. To reproduce the FAITH test-set results on TIQ and TimeQuestions, please use the caches below.
+
+**TIQ**
+
+- [ER cache](https://qa.mpi-inf.mpg.de/faith/caches/tiq/er_cache.pickle)
+- [Wikipedia dump](https://qa.mpi-inf.mpg.de/faith/caches/tiq/wikipedia_dump.pickle)
+
+**TimeQuestions**
+
+- [ER cache](https://qa.mpi-inf.mpg.de/faith/caches/timequestions/er_cache.pickle)
+- [Wikipedia dump](https://qa.mpi-inf.mpg.de/faith/caches/timequestions/wikipedia_dump.pickle)
+
+Download the two files for a benchmark into `_data/<benchmark>/`, and point `er_cache_path` and `er_wikipedia_dump` in the evaluation config to those files.
+
 ## Reproduce paper results
 ### Main results
 Please run the following script to reproduce the main results of FAITH (Table 3 in the WWW 2024 paper):
