@@ -171,8 +171,8 @@ tvr_topk_answer: 1
 # cache path
 er_wikipedia_use_cache: True
 er_use_cache: True
-er_cache_path: "er_cache/er_cache_evaluate.pickle"
-er_wikipedia_dump: "wikipedia/wikipedia_dump_evaluate.pickle"
+er_cache_path: "er_cache/er_cache.pickle"
+er_wikipedia_dump: "wikipedia/wikipedia_dump.pickle"
 er_on_the_fly: True
 ers_update_clocq_cache: True
 
